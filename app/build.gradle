@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.androidarchitecture"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //Needed because of this https://github.com/square/okio/issues/58
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}
+
+dependencies {
+    final SUPPORT_LIBRARY_VERSION = '23.1.1'
+    final DBFLOW_VERSION = '2.2.1'
+    final RETROFIT_VERSION = '2.0.0-beta2'
+    final DAGGER_VERSION = '2.0.2'
+
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    compile "com.raizlabs.android:DBFlow-Core:$DBFLOW_VERSION"
+    compile "com.raizlabs.android:DBFlow:$DBFLOW_VERSION"
+    compile "com.squareup.retrofit:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit:converter-jackson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit:adapter-rxjava:$RETROFIT_VERSION"
+
+
+    compile  "com.google.dagger:dagger:$DAGGER_VERSION"
+    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+
+    // APT dependencies
+    apt daggerCompiler
+}
