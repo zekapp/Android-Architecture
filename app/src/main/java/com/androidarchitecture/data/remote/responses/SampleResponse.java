@@ -1,12 +1,13 @@
 package com.androidarchitecture.data.remote.responses;
 
-import com.androidarchitecture.vo.Sample;
+import com.androidarchitecture.data.vo.Sample;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 /**
- * Created by zeki on 17/01/2016.
+ * Created by Zeki Guler on 19,January,2016
+ * ©2015 Appscore. All Rights Reserved
  */
 public class SampleResponse {
     private int total;

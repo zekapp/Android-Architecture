@@ -3,19 +3,29 @@ package com.androidarchitecture.config;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.androidarchitecture.di.qualifier.ApplicationContext;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Created by zeki on 17/01/2016.
  */
+
+@Singleton
 public class AppConfig {
 
     private static final String KEY_API_URL = "api_url";
 
     private final SharedPreferences mSharedPreferences;
-    public AppConfig(Context context) {
+
+    @Inject
+    public AppConfig(@ApplicationContext Context context) {
         mSharedPreferences = context.getSharedPreferences("app_cfg", Context.MODE_PRIVATE);
     }
 
     public String getApiUrl() {
-        return mSharedPreferences.getString(KEY_API_URL, "http://polls.apiblueprint.org/api/v1/");
+        return "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/";
+//        return mSharedPreferences.getString(KEY_API_URL, "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/");
     }
 }

@@ -1,4 +1,4 @@
-package com.androidarchitecture.vo;
+package com.androidarchitecture.data.vo;
 
 import com.androidarchitecture.data.local.AppDatabase;
 import com.androidarchitecture.utils.Validation;

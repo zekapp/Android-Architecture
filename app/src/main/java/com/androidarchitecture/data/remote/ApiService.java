@@ -1,7 +1,6 @@
 package com.androidarchitecture.data.remote;
 
-import com.androidarchitecture.data.remote.responses.SampleResponse;
-import com.androidarchitecture.vo.MData;
+import com.androidarchitecture.data.remote.responses.SampleResponseData;
 
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -13,7 +12,7 @@ import rx.Observable;
 public interface ApiService {
 
     @GET("samples")
-    Observable<MData<SampleResponse>> getSamples(@Query("page") int page, @Query("per_page") int perPage);
+    Observable<SampleResponseData> getSamples(@Query("page") int page, @Query("per_page") int perPage);
 
 
 }
