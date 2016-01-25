@@ -35,4 +35,27 @@ public class Sample extends BaseModel implements Validation {
         }
     }
 
+    public long getSampleId() {
+        return mSampleId;
+    }
+
+    public void setSampleId(long sampleId) {
+        mSampleId = sampleId;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public long getTime() {
+        return mTime;
+    }
+
+    public void setTime(long time) {
+        mTime = time;
+    }
 }

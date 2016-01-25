@@ -31,15 +31,10 @@ public class DatabaseHelper {
         mDb = database;
     }
 
-    public Observable<Sample> setRibots(final Collection<Sample> newRibots) {
-        return Observable.create(new Observable.OnSubscribe<Sample>() {
-            @Override
-            public void call(Subscriber<? super Sample> subscriber) {
 
-            }
-        });
-    }
-
+    /**
+     * Set current values (checks PrimaryKey). If it is not in Db then add new row.
+     * */
     public Observable<Sample> setSamples(final List<Sample> samples) {
         Timber.d("Observable<Sample> setSamples(final List<Sample> samples)");
         return Observable.create( new Observable.OnSubscribe<Sample>(){
@@ -62,6 +57,12 @@ public class DatabaseHelper {
 
 
     public List<Sample> sampleListQuery(){
+        Timber.d("List<Sample> sampleListQuery()");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new Select().from(Sample.class).queryList();
     }
 

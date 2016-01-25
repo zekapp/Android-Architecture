@@ -13,4 +13,8 @@ public class SampleResponseData {
     public SampleResponse getSampleResponse() {
         return mSampleResponse;
     }
+
+    public void setSampleResponse(SampleResponse sampleResponse) {
+        mSampleResponse = sampleResponse;
+    }
 }

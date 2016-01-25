@@ -2,7 +2,7 @@ package com.androidarchitecture.di.component;
 
 import com.androidarchitecture.di.module.ActivityModule;
 import com.androidarchitecture.di.scope.PerActivity;
-import com.androidarchitecture.ui.main.MainActivity;
+import com.androidarchitecture.ui.main.MainBaseActivity;
 
 import dagger.Component;
 
@@ -14,6 +14,6 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
 
-    void inject(MainActivity mainActivity);
+    void inject(MainBaseActivity mainActivity);
 
 }

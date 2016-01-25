@@ -49,4 +49,32 @@ public class SampleResponse {
     public List<Sample> getSampleList() {
         return sampleList;
     }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public void setPerPage(int perPage) {
+        this.perPage = perPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public void setLastPage(int lastPage) {
+        this.lastPage = lastPage;
+    }
+
+    public void setFrom(int from) {
+        this.from = from;
+    }
+
+    public void setTo(int to) {
+        this.to = to;
+    }
+
+    public void setSampleList(List<Sample> sampleList) {
+        this.sampleList = sampleList;
+    }
 }
