@@ -5,8 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.androidarchitecture.data.vo.Sample;
 import com.raizlabs.android.dbflow.runtime.TransactionManager;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class DatabaseHelper {
         mDb = database;
     }
 
+    public void clearTables(){
+        Delete.table(Sample.class);
+    }
 
     /**
      * Set current values (checks PrimaryKey). If it is not in Db then add new row.
