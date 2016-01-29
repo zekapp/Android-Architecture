@@ -35,7 +35,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         if (mSubscription != null) mSubscription.unsubscribe();
     }
 
-    public void loadRibots() {
+    public void loadSamples() {
         checkViewAttached();
         mSubscription = mDataManager.getSamplesFromDbThenUpdateViaApi(0, 30)
                 .observeOn(AndroidSchedulers.mainThread())

@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements MainMvpView{
         mRecyclerView.setAdapter(mSampleAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMainPresenter.attachView(this);
-        mMainPresenter.loadRibots();
+        mMainPresenter.loadSamples();
     }
 
     /***** MVP View methods implementation *****/
