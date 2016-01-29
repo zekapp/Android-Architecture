@@ -63,11 +63,6 @@ public class DatabaseHelper {
 
     public List<Sample> sampleListQuery(){
         Timber.d("List<Sample> sampleListQuery()");
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return new Select().from(Sample.class).queryList();
     }
 

@@ -1,6 +1,5 @@
 package com.androidarchitecture.ui.main;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.RibotViewHolder> {
+public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.SampleViewHolder> {
 
     private List<Sample> mSamples;
 
@@ -33,14 +32,14 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.RibotViewH
     }
 
     @Override
-    public RibotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_sample, parent, false);
-        return new RibotViewHolder(itemView);
+        return new SampleViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(RibotViewHolder holder, int position) {
+    public void onBindViewHolder(SampleViewHolder holder, int position) {
         Sample sample = mSamples.get(position);
         holder.idTextView.setText(String.valueOf(sample.getSampleId()));
         holder.timeTextView.setText(TimeUtils.convertReadableDate(sample.getTime(),TimeUtils.DATE_FORMAT_TYPE_1));
@@ -52,13 +51,13 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.RibotViewH
         return mSamples.size();
     }
 
-    class RibotViewHolder extends RecyclerView.ViewHolder {
+    class SampleViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.sample_id) TextView idTextView;
         @Bind(R.id.sample_description) TextView descriptionTextView;
         @Bind(R.id.sample_time) TextView timeTextView;
 
-        public RibotViewHolder(View itemView) {
+        public SampleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
