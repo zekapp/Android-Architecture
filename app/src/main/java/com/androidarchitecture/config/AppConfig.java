@@ -3,13 +3,15 @@ package com.androidarchitecture.config;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.androidarchitecture.R;
 import com.androidarchitecture.di.qualifier.ApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by zeki on 17/01/2016.
+ * Created by Zeki Guler on 10,March,2016
+ * ©2015 Appscore. All Rights Reserved
  */
 
 @Singleton
@@ -18,14 +20,15 @@ public class AppConfig {
     private static final String KEY_API_URL = "api_url";
 
     private final SharedPreferences mSharedPreferences;
+    private Context mContext;
 
     @Inject
     public AppConfig(@ApplicationContext Context context) {
+        mContext = context;
         mSharedPreferences = context.getSharedPreferences("app_cfg", Context.MODE_PRIVATE);
     }
 
     public String getApiUrl() {
-        return "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/";
-//        return mSharedPreferences.getString(KEY_API_URL, "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/");
+        return mContext.getString(R.string.server_sample_base_url);
     }
 }

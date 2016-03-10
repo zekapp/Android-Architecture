@@ -2,13 +2,13 @@ package com.androidarchitecture.data;
 
 import com.androidarchitecture.data.job.fetch.FetchSamplesJob;
 import com.androidarchitecture.data.local.DatabaseHelper;
+import com.androidarchitecture.data.local.PreferencesHelper;
 import com.androidarchitecture.data.remote.ApiService;
 import com.androidarchitecture.data.remote.responses.SampleResponseData;
 import com.androidarchitecture.data.vo.Sample;
 import com.path.android.jobqueue.JobManager;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,9 +16,6 @@ import javax.inject.Singleton;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
 import rx.functions.Func1;
 import timber.log.Timber;
 
@@ -31,14 +28,17 @@ import timber.log.Timber;
 public class DataManager {
 
     private final DatabaseHelper mDatabaseHelper;
-    private final JobManager mJobHelper;
+    private final JobManager mJobManagerHelper;
     private final ApiService mApiService;
+    private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public DataManager(ApiService apiService, DatabaseHelper databaseHelper, JobManager jobManager){
+    public DataManager(ApiService apiService, DatabaseHelper databaseHelper,
+                       JobManager jobManager, PreferencesHelper preferencesHelper){
         mDatabaseHelper = databaseHelper;
-        mJobHelper = jobManager;
+        mJobManagerHelper = jobManager;
         mApiService = apiService;
+        mPreferencesHelper = preferencesHelper;
     }
 
     /**
@@ -73,7 +73,7 @@ public class DataManager {
      * It check internet connection and other issue. If error occured related to
      * */
     public void fetchSamplesAsync(int page, int perPage){
-        mJobHelper.addJobInBackground(new FetchSamplesJob(page, perPage));
+        mJobManagerHelper.addJobInBackground(new FetchSamplesJob(page, perPage));
     }
 
 
@@ -125,18 +125,4 @@ public class DataManager {
             }
         });
     }
-/*
-*
-* new Action1<SampleResponseData>() {
-                    @Override
-                    public void call(SampleResponseData sampleResponseData) {
-                        mDatabaseHelper.setSamples(sampleResponseData.getSampleResponse().getSampleList())
-                        .doOnCompleted(new Action0() {
-                            @Override
-                            public void call() {
-                                subscriber.onNext(mDatabaseHelper.sampleListQuery());
-                            }
-                        }).subscribe();
-                    }
-                }*/
 }
