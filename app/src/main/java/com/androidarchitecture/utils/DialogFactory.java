@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
+import android.widget.EditText;
 
 import com.androidarchitecture.R;
 
@@ -47,6 +48,7 @@ public final class DialogFactory {
                                              String message,
                                              String positiveButton,
                                              String negativeButton,
+                                             boolean isCancelable,
                                              DialogInterface.OnClickListener positiveListener,
                                              DialogInterface.OnClickListener negativeListener) {
 
@@ -54,6 +56,7 @@ public final class DialogFactory {
                 .setTitle(title)
                 .setMessage(Html.fromHtml(message))
                 .setPositiveButton(positiveButton, positiveListener)
+                .setCancelable(isCancelable)
                 .setNegativeButton(negativeButton, negativeListener);
         return alertDialog.create();
     }
@@ -71,6 +74,7 @@ public final class DialogFactory {
                 context.getString(messageResource),
                 context.getString(positiveButtonResource),
                 context.getString(negativeButtonResource),
+                true,
                 positiveListener,
                 negativeListener);
     }
@@ -86,4 +90,28 @@ public final class DialogFactory {
         return createProgressDialog(context, context.getString(messageResource));
     }
 
+
+    public static Dialog createDialogWithEditText(Context context , EditText input, String title, String message,
+                                                  DialogInterface.OnClickListener positiveListener,
+                                                  DialogInterface.OnClickListener negativeListener ) {
+        return  new AlertDialog.Builder(context)
+                .setView(input)
+                .setTitle(title)
+                .setMessage(Html.fromHtml(message))
+                .setPositiveButton("Ok", positiveListener)
+                .setNegativeButton("Cancel", negativeListener)
+                .create();
+    }
+
+    public static Dialog createDialogWithOption(Context context ,EditText input, String title, String message,
+                                                DialogInterface.OnClickListener positiveListener,
+                                                DialogInterface.OnClickListener negativeListener ) {
+        return  new AlertDialog.Builder(context)
+                .setView(input)
+                .setTitle(title)
+                .setMessage(Html.fromHtml(message))
+                .setPositiveButton("Ok", positiveListener)
+                .setNegativeButton("Cancel", negativeListener)
+                .create();
+    }
 }

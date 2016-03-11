@@ -26,7 +26,10 @@ public final class OauthInterceptor implements Interceptor {
     Request.Builder builder = chain.request().newBuilder();
 
     /**
-     * If you need to change header use this instead of retrofit inline
+     * If you need to change header use this method instead of setting  inline
+     *
+     * Build your own logic here
+     *
      * */
 /*
     if (mPreferenceHelper.isTokenSet()) {
