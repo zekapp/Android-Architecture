@@ -1,4 +1,4 @@
-package com.androidarchitecture.ui.main;
+package com.androidarchitecture.ui.sample;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

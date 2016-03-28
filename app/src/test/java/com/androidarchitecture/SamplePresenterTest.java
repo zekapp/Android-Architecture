@@ -2,8 +2,8 @@ package com.androidarchitecture;
 
 import com.androidarchitecture.data.DataManager;
 import com.androidarchitecture.data.vo.Sample;
-import com.androidarchitecture.ui.main.MainMvpView;
-import com.androidarchitecture.ui.main.MainPresenter;
+import com.androidarchitecture.ui.sample.SampleMvpView;
+import com.androidarchitecture.ui.sample.SamplePresenter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,24 +25,25 @@ import static org.mockito.Mockito.*;
  * ©2015 Appscore. All Rights Reserved
  */
 @RunWith(MockitoJUnitRunner.class)
-public class MainPresenterTest {
+public class SamplePresenterTest {
     @Mock DataManager mMockDataManger;
-    @Mock MainMvpView mMockMainMvpView;
+    @Mock
+    SampleMvpView mMockSampleMvpView;
 
-    private MainPresenter mMainPresenter;
+    private SamplePresenter mSamplePresenter;
 
     @Rule
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
 
     @Before
     public void setUp(){
-        mMainPresenter = new MainPresenter(mMockDataManger);
-        mMainPresenter.attachView(mMockMainMvpView);
+        mSamplePresenter = new SamplePresenter(mMockDataManger);
+        mSamplePresenter.attachView(mMockSampleMvpView);
     }
 
     @After
     public void tearDown(){
-        mMainPresenter.detachView();
+        mSamplePresenter.detachView();
     }
 
     @Test
@@ -52,10 +53,10 @@ public class MainPresenterTest {
         when(mMockDataManger.getSamplesFromDbThenUpdateViaApi(0,30))
                 .thenReturn(Observable.just(samples));
 
-        mMainPresenter.loadSamples();
-        verify(mMockMainMvpView).showSamples(samples);
-        verify(mMockMainMvpView,never()).showError();
-        verify(mMockMainMvpView, never()).showSamplesEmpty();
+        mSamplePresenter.loadSamples();
+        verify(mMockSampleMvpView).showSamples(samples);
+        verify(mMockSampleMvpView,never()).showError();
+        verify(mMockSampleMvpView, never()).showSamplesEmpty();
     }
 
     @Test
@@ -63,10 +64,10 @@ public class MainPresenterTest {
         when(mMockDataManger.getSamplesFromDbThenUpdateViaApi(0,30))
                 .thenReturn(Observable.just(Collections.<Sample>emptyList()));
 
-        mMainPresenter.loadSamples();
-        verify(mMockMainMvpView,never()).showSamples(anyListOf(Sample.class));
-        verify(mMockMainMvpView,never()).showError();
-        verify(mMockMainMvpView).showSamplesEmpty();
+        mSamplePresenter.loadSamples();
+        verify(mMockSampleMvpView,never()).showSamples(anyListOf(Sample.class));
+        verify(mMockSampleMvpView,never()).showError();
+        verify(mMockSampleMvpView).showSamplesEmpty();
     }
 
     @Test
@@ -75,9 +76,9 @@ public class MainPresenterTest {
                 .when(mMockDataManger)
                 .getSamplesFromDbThenUpdateViaApi(0,30);
 
-        mMainPresenter.loadSamples();
-        verify(mMockMainMvpView,never()).showSamples(anyListOf(Sample.class));
-        verify(mMockMainMvpView).showError();
-        verify(mMockMainMvpView,never()).showSamplesEmpty();
+        mSamplePresenter.loadSamples();
+        verify(mMockSampleMvpView,never()).showSamples(anyListOf(Sample.class));
+        verify(mMockSampleMvpView).showError();
+        verify(mMockSampleMvpView,never()).showSamplesEmpty();
     }
 }

@@ -1,63 +1,40 @@
 package com.androidarchitecture.ui.main;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.androidarchitecture.R;
-import com.androidarchitecture.data.vo.Sample;
-
 import com.androidarchitecture.ui.base.BaseActivity;
-import com.androidarchitecture.utils.DialogFactory;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
- * Created by Zeki Guler on 20,January,2016
+ * Created by Zeki Guler on 29,March,2016
  * ©2015 Appscore. All Rights Reserved
+ *
+ * This is main activity. Start programming from here.
+ *
+ * Change the default launch activity from manifest
+ *
  */
-public class MainActivity extends BaseActivity implements MainMvpView{
+public class MainActivity extends BaseActivity implements MainActivityMvpView{
 
-    @Inject MainPresenter mMainPresenter;
-    @Inject SampleAdapter mSampleAdapter;
-
-    @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
+    @Inject
+    MainActivityPresenter mMainActivityPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        mRecyclerView.setAdapter(mSampleAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mMainPresenter.attachView(this);
-        mMainPresenter.loadSamples();
-    }
-
-    /***** MVP View methods implementation *****/
-
-    @Override
-    public void showSamples(List<Sample> samples) {
-        mSampleAdapter.setSamples(samples);
-        mSampleAdapter.notifyDataSetChanged();
+        setContentView(R.layout.main_activity);
     }
 
     @Override
-    public void showSamplesEmpty() {
-        Toast.makeText(this, R.string.empty_samples, Toast.LENGTH_LONG).show();
+    public void showProgress() {
+        // will be called from presenter.
     }
 
     @Override
-    public void showError() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_loading_sample))
-                .show();
+    public void stopProgress() {
+        // will be called from presenter.
     }
 }

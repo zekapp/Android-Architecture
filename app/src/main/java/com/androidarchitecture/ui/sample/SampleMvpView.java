@@ -1,4 +1,4 @@
-package com.androidarchitecture.ui.main;
+package com.androidarchitecture.ui.sample;
 
 import com.androidarchitecture.data.vo.Sample;
 import com.androidarchitecture.ui.base.MvpView;
@@ -6,7 +6,7 @@ import com.androidarchitecture.ui.base.MvpView;
 import java.util.List;
 
 
-public interface MainMvpView extends MvpView {
+public interface SampleMvpView extends MvpView {
 
     void showSamples(List<Sample> samples);
 

@@ -1,4 +1,4 @@
-package com.androidarchitecture.ui.main;
+package com.androidarchitecture.ui.sample;
 
 import com.androidarchitecture.data.DataManager;
 import com.androidarchitecture.data.vo.Sample;
@@ -14,18 +14,18 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class MainPresenter extends BasePresenter<MainMvpView> {
+public class SamplePresenter extends BasePresenter<SampleMvpView> {
 
     private final DataManager mDataManager;
     private Subscription mSubscription;
 
     @Inject
-    public MainPresenter(DataManager dataManager) {
+    public SamplePresenter(DataManager dataManager) {
         mDataManager = dataManager;
     }
 
     @Override
-    public void attachView(MainMvpView mvpView) {
+    public void attachView(SampleMvpView mvpView) {
         super.attachView(mvpView);
     }
 
