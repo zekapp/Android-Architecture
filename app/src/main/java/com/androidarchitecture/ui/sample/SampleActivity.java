@@ -33,7 +33,7 @@ public class SampleActivity extends BaseActivity implements SampleMvpView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sample);
         ButterKnife.bind(this);
 
         mRecyclerView.setAdapter(mSampleAdapter);
