@@ -3,7 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 String APK_NAME = "aa"
 int VERSION_CODE = 1
-String VERSION_NAME = "0.3.0"
+String VERSION_NAME = "0.3.1"
 
 // This line generates the apk with set name.
 project.archivesBaseName = APK_NAME + "_v_" + VERSION_NAME;
@@ -44,6 +44,13 @@ android {
         //change server url for production and staging and release version. In the example they use
         // same url for each build
 
+        /**
+         *  Todo
+         *
+         * Change base url
+         * Change GCM  sender Id
+         * Change GCM server key. (Provide the gcm key to backend)
+        * */
         release {
             resValue("string", "server_sample_base_url",  "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/")
             resValue("string", "gcm_sender_id",  "99770304940") // server key: AIzaSyCucrcN50Hxcc-ojBGncGO7TRzGPbBF9tw
@@ -64,7 +71,7 @@ android {
 
         debug_staging {
             resValue("string", "server_sample_base_url",  "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/")
-            resValue("string", "gcm_sender_id",  "99770304940") // server key: AIzaSyCucrcN50Hxcc-ojBGncGO7TRzGPbBF9tw
+            resValue("string", "gcm_sender_id",  "99770304940")
 
             versionNameSuffix  " debug_staging"
             signingConfig signingConfigs.debug
