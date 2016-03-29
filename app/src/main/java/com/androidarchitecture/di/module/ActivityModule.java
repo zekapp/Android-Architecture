@@ -9,7 +9,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by zeki on 17/01/2016.
+ * Created by Zeki Guler on 29,March,2016
+ * ©2015 Appscore. All Rights Reserved
  */
 @Module
 public class ActivityModule {

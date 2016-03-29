@@ -3,7 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 String APK_NAME = "aa"
 int VERSION_CODE = 1
-String VERSION_NAME = "0.2.3"
+String VERSION_NAME = "0.3.0"
 
 // This line generates the apk with set name.
 project.archivesBaseName = APK_NAME + "_v_" + VERSION_NAME;
@@ -46,7 +46,7 @@ android {
 
         release {
             resValue("string", "server_sample_base_url",  "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/")
-
+            resValue("string", "gcm_sender_id",  "99770304940") // server key: AIzaSyCucrcN50Hxcc-ojBGncGO7TRzGPbBF9tw
 
             minifyEnabled false
             signingConfig signingConfigs.release
@@ -55,6 +55,7 @@ android {
 
         debug_production {
             resValue("string", "server_sample_base_url",  "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/")
+            resValue("string", "gcm_sender_id",  "99770304940") // server key: AIzaSyCucrcN50Hxcc-ojBGncGO7TRzGPbBF9tw
 
             versionNameSuffix  " debug_production"
             signingConfig signingConfigs.debug
@@ -63,6 +64,7 @@ android {
 
         debug_staging {
             resValue("string", "server_sample_base_url",  "http://private-f7ff9-androidarchitecturetestapi.apiary-mock.com/api/v1/")
+            resValue("string", "gcm_sender_id",  "99770304940") // server key: AIzaSyCucrcN50Hxcc-ojBGncGO7TRzGPbBF9tw
 
             versionNameSuffix  " debug_staging"
             signingConfig signingConfigs.debug
@@ -113,6 +115,8 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.1'
     compile 'com.zekapp.library:progreswheelview:1.1.2'
 
+    // Google Play Services
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
 
     // Unit tests dependencies
     testCompile jUnit
