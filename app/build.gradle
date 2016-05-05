@@ -88,8 +88,8 @@ android {
 dependencies {
     final SUPPORT_LIBRARY_VERSION = '23.2.0'
     final DBFLOW_VERSION    = '2.2.1'
-    final RETROFIT_VERSION  = '2.0.0-beta4'
-    final DAGGER_VERSION    = '2.0.2'
+    final RETROFIT_VERSION  = '2.0.2'
+    final DAGGER_VERSION    = '2.1'
     final JOB_QUEUE_VERSION = '1.3.5'
     final HAMCREST_VERSION  = '1.3' // Hamcrest allows checking for conditions in your code via existing matchers classes and allows you to define your custom matcher implementations
     final EVENT_BUS         = '2.4.0'
