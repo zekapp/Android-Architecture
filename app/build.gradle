@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.github.triplet.play'
 
 String APK_NAME = "aa"
 int VERSION_CODE = 1
@@ -10,7 +11,7 @@ project.archivesBaseName = APK_NAME + "_v_" + VERSION_NAME;
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '23.0.3'
     dataBinding {
         enabled = true
     }
@@ -85,8 +86,15 @@ android {
     }
 }
 
+play {
+    serviceAccountEmail = 'your-service-account-email'
+    pk12File = file('key.p12')
+    // By default publishes to Alpha channel
+    track = 'alpha'
+}
+
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '23.2.0'
+    final SUPPORT_LIBRARY_VERSION = '23.3.0'
     final DBFLOW_VERSION    = '2.2.1'
     final RETROFIT_VERSION  = '2.0.2'
     final DAGGER_VERSION    = '2.1'
@@ -102,10 +110,10 @@ dependencies {
     // App Dependency
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:design:23.2.0'
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:cardview-v7:23.2.0"
+    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.raizlabs.android:DBFlow-Core:$DBFLOW_VERSION"
     compile "com.raizlabs.android:DBFlow:$DBFLOW_VERSION"
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
