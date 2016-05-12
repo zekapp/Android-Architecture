@@ -7,6 +7,7 @@ package com.androidarchitecture;
 
 import com.androidarchitecture.data.DataManager;
 import com.androidarchitecture.data.local.DatabaseHelper;
+import com.androidarchitecture.data.local.PreferencesHelper;
 import com.androidarchitecture.data.remote.ApiService;
 import com.androidarchitecture.data.remote.responses.SampleResponseData;
 import com.androidarchitecture.data.vo.Sample;
@@ -43,12 +44,13 @@ public class DataManagerTest {
     @Mock DatabaseHelper mMockDatabaseHelper;
     @Mock JobManager mJobHelper;
     @Mock ApiService mMockApiService;
+    @Mock PreferencesHelper mPreferencesHelper;
 
     private DataManager mDataManager;
 
     @Before
     public void setUp() {
-        mDataManager = new DataManager(mMockApiService, mMockDatabaseHelper, mJobHelper);
+        mDataManager = new DataManager(mMockApiService, mMockDatabaseHelper, mJobHelper, mPreferencesHelper);
     }
 
     @Test

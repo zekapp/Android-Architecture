@@ -6,9 +6,11 @@ import android.content.Context;
 import com.androidarchitecture.di.component.AppComponent;
 import com.androidarchitecture.di.component.DaggerAppComponent;
 import com.androidarchitecture.di.module.AppModule;
+import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 /**
@@ -22,6 +24,7 @@ public class App extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         FlowManager.init(this);
 

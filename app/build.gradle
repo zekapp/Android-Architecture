@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+//apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.github.triplet.play'
 
@@ -76,7 +91,7 @@ android {
 
             versionNameSuffix  " debug_staging"
             signingConfig signingConfigs.debug
-            debuggable true
+//            debuggable true
         }
     }
 
@@ -86,9 +101,10 @@ android {
     }
 }
 
+// Plugin Info: https://github.com/Triple-T/gradle-play-publisher#usage
+// HOW TO CREATE Keys:  https://github.com/jay0lee/GAM/wiki/Creating-client_secrets.json-and-oauth2service.json
 play {
-    serviceAccountEmail = 'your-service-account-email'
-    pk12File = file('key.p12')
+    jsonFile = file('keys.json')
     // By default publishes to Alpha channel
     track = 'alpha'
 }
@@ -128,7 +144,7 @@ dependencies {
 
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.1'
-    compile 'com.zekapp.library:progreswheelview:1.1.2'
+
 
     // Google Play Services
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
@@ -148,4 +164,7 @@ dependencies {
     // APT dependencies
     apt daggerCompiler
     apt dbFlowCompiler
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 }

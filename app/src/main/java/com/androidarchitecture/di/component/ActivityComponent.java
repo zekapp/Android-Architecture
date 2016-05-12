@@ -2,7 +2,8 @@ package com.androidarchitecture.di.component;
 
 import com.androidarchitecture.di.module.ActivityModule;
 import com.androidarchitecture.di.scope.PerActivity;
-import com.androidarchitecture.ui.login.SplashActivity;
+import com.androidarchitecture.ui.login.SignInActivity;
+import com.androidarchitecture.ui.splash.SplashActivity;
 import com.androidarchitecture.ui.main.MainActivity;
 import com.androidarchitecture.ui.sample.SampleActivity;
 
@@ -22,4 +23,6 @@ public interface ActivityComponent {
     void inject(MainActivity mainActivity);
 
     void inject(SplashActivity dispatchActivity);
+
+    void inject(SignInActivity signInActivity);
 }

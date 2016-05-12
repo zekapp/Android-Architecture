@@ -34,7 +34,7 @@ public class DataManager {
 
     @Inject
     public DataManager(ApiService apiService, DatabaseHelper databaseHelper,
-                       JobManager jobManager, PreferencesHelper preferencesHelper){
+                       JobManager jobManager, PreferencesHelper preferencesHelper) {
         mDatabaseHelper = databaseHelper;
         mJobManagerHelper = jobManager;
         mApiService = apiService;
@@ -43,9 +43,9 @@ public class DataManager {
 
     /**
      * Fetch eventually data from api and save them to Db.
-     * */
+     */
     public Observable<Sample> syncSample(int page, int perPage) {
-        return mApiService.getSamples(page,perPage)
+        return mApiService.getSamples(page, perPage)
                 .concatMap(new Func1<SampleResponseData, Observable<Sample>>() {
                     @Override
                     public Observable<Sample> call(SampleResponseData data) {
@@ -57,7 +57,7 @@ public class DataManager {
 
     /**
      * Fetch all samples from db
-     * */
+     */
     public Observable<List<Sample>> getAllSamples() {
         return Observable.create(new Observable.OnSubscribe<List<Sample>>() {
             @Override
@@ -69,10 +69,10 @@ public class DataManager {
 
     /**
      * Fetch data api and save it eventually to Db.
-     *
+     * <p/>
      * It check internet connection and other issue. If error occured related to
-     * */
-    public void fetchSamplesAsync(int page, int perPage){
+     */
+    public void fetchSamplesAsync(int page, int perPage) {
         mJobManagerHelper.addJobInBackground(new FetchSamplesJob(page, perPage));
     }
 
@@ -81,14 +81,14 @@ public class DataManager {
      * Update UI with old data from db.
      * Then fetch new data from Api and update Db.
      * Then Update UI with fresh data again.
-    * */
-    public Observable<List<Sample>> getSamplesFromDbThenUpdateViaApi(final int page, final int perPage){
+     */
+    public Observable<List<Sample>> getSamplesFromDbThenUpdateViaApi(final int page, final int perPage) {
         return Observable.create(new Observable.OnSubscribe<List<Sample>>() {
             @Override
             public void call(final Subscriber<? super List<Sample>> subscriber) {
                 subscriber.onNext(mDatabaseHelper.sampleListQuery());
 
-                mApiService.getSamples(page,perPage).subscribe(new Observer<SampleResponseData>() {
+                mApiService.getSamples(page, perPage).subscribe(new Observer<SampleResponseData>() {
                     @Override
                     public void onCompleted() {
 
