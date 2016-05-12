@@ -1,5 +1,6 @@
 package com.androidarchitecture.data;
 
+import com.androidarchitecture.config.AppConfig;
 import com.androidarchitecture.data.job.fetch.FetchSamplesJob;
 import com.androidarchitecture.data.local.DatabaseHelper;
 import com.androidarchitecture.data.local.PreferencesHelper;
@@ -31,14 +32,17 @@ public class DataManager {
     private final JobManager mJobManagerHelper;
     private final ApiService mApiService;
     private final PreferencesHelper mPreferencesHelper;
+    private final AppConfig mConfigHelper;
 
     @Inject
     public DataManager(ApiService apiService, DatabaseHelper databaseHelper,
-                       JobManager jobManager, PreferencesHelper preferencesHelper) {
+                       JobManager jobManager, PreferencesHelper preferencesHelper,
+                       AppConfig configHelper) {
         mDatabaseHelper = databaseHelper;
         mJobManagerHelper = jobManager;
         mApiService = apiService;
         mPreferencesHelper = preferencesHelper;
+        mConfigHelper = configHelper;
     }
 
     /**
@@ -70,7 +74,15 @@ public class DataManager {
     /**
      * Fetch data api and save it eventually to Db.
      * <p/>
-     * It check internet connection and other issue. If error occured related to
+     * This function finish the job eventually even if there is no internet connection.
+     *
+     * It puts the job in to the job queue (It manages the job in own database). If there is error
+     * related network communication it flag the job as not sent and when network connection back
+     * it send/receive the packet
+     *
+     * Use eventbus to get the response if necessary.
+     *
+     *
      */
     public void fetchSamplesAsync(int page, int perPage) {
         mJobManagerHelper.addJobInBackground(new FetchSamplesJob(page, perPage));
@@ -78,9 +90,13 @@ public class DataManager {
 
 
     /**
-     * Update UI with old data from db.
-     * Then fetch new data from Api and update Db.
-     * Then Update UI with fresh data again.
+     * This function demonstrate the case such as
+     *
+     * - Get data from Db (if no data hits api)
+     * - Update the Ui with stored data.
+     * - Then hits the api to refresh the data in db
+     * - Then updates the Ui with uptodate data.
+     *
      */
     public Observable<List<Sample>> getSamplesFromDbThenUpdateViaApi(final int page, final int perPage) {
         return Observable.create(new Observable.OnSubscribe<List<Sample>>() {
