@@ -95,7 +95,7 @@ public class DataManager {
      * - Get data from Db (if no data hits api)
      * - Update the Ui with stored data.
      * - Then hits the api to refresh the data in db
-     * - Then updates the Ui with uptodate data.
+     * - Then updates the Ui with up to date data.
      *
      */
     public Observable<List<Sample>> getSamplesFromDbThenUpdateViaApi(final int page, final int perPage) {

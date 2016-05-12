@@ -45,9 +45,12 @@ The architecture of our Android apps is based on the [MVP](https://en.wikipedia.
 Looking at the diagram from right to left:
 
 * __Helpers (Model)__: A set of classes, each of them with a very specific responsibility. Their function can range from talking to APIs or a database to implementing some specific business logic. Every project will have different helpers but the most common ones are:
+	- __Network Services__ : [Retrofit](http://square.github.io/retrofit) interfaces that talk to Restful APIs, each different API will have its own Retrofit service. They return Rx Observables.
 	- __DatabaseHelper__: It handles inserting, updating and retrieving data from a local SQLite database. Its methods return Rx Observables that emit plain java objects (models)
 	- __PreferencesHelper__: It saves and gets data from `SharedPreferences`, it can return Observables or plain java objects directly.
-	- __Retrofit services__ : [Retrofit](http://square.github.io/retrofit) interfaces that talk to Restful APIs, each different API will have its own Retrofit service. They return Rx Observables.
+	- __ConfigurationHelper__ : It saves and gets data from `SharedPreferences` too. It can return some instant config data related project. such as base api etc
+	- __JobManager__ : Priority Job Queue is an implementation of a Job Queue specifically written for Android to easily schedule jobs (tasks) that run in the background, improving UX and application stability.
+	- __Interceptors(Optional)__ : Interceptors are a powerful mechanism that can monitor, rewrite, and retry calls. For example if you need to add header for each call you may use. 
 
 * __Data Manager (Model)__: It's a key part of the architecture. It keeps a reference to every helper class and uses them to satisfy the requests coming from the presenters. Its methods make extensive use of Rx operators to combine, transform or filter the output coming from the helpers in order to generate the desired output ready for the Presenters. It returns observables that emit data models.
 
