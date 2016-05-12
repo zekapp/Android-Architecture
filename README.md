@@ -8,11 +8,12 @@ Libraries and tools included:
 - [RxJava](https://github.com/ReactiveX/RxJava) and [RxAndroid](https://github.com/ReactiveX/RxAndroid) 
 - [Retrofit 2](http://square.github.io/retrofit/)
 - [Dagger 2](http://google.github.io/dagger/)
-- [SqlBrite](https://github.com/square/sqlbrite)
+- [DBFlow](https://github.com/Raizlabs/DBFlow)
 - [Butterknife](https://github.com/JakeWharton/butterknife)
 - [Timber](https://github.com/JakeWharton/timber)
 - [EventBus](https://github.com/greenrobot/EventBus)
 - [JobManager](https://github.com/yigit/android-priority-jobqueue)
+- [PlayService](https://developers.google.com/android/guides/setup)
 
 ## Architecture
    This project follows Android architecture guidelines that are based on [MVP (Model View Presenter)](https://www.wikiwand.com/en/Model%E2%80%93view%E2%80%93presenter). 
