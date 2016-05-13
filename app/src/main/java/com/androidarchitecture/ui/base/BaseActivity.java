@@ -1,5 +1,6 @@
 package com.androidarchitecture.ui.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -13,6 +14,7 @@ import com.androidarchitecture.App;
 import com.androidarchitecture.di.component.ActivityComponent;
 import com.androidarchitecture.di.component.DaggerActivityComponent;
 import com.androidarchitecture.di.module.ActivityModule;
+import com.androidarchitecture.utils.DialogFactory;
 import com.androidarchitecture.utils.PermissionUtils;
 
 import java.security.Permission;
@@ -28,10 +30,12 @@ public class BaseActivity extends AppCompatActivity {
     private int KEY_PERMISSION = 0;
     private String permissionsAsk[];
     private PermissionResult permissionResult;
-
+    public ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mProgressDialog = DialogFactory.createProgressDialog(this, "Please wait");
     }
 
     public ActivityComponent getActivityComponent() {
@@ -41,6 +45,14 @@ public class BaseActivity extends AppCompatActivity {
                     .build();
         }
         return mActivityComponent;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mProgressDialog != null)
+            mProgressDialog.dismiss();
+        mProgressDialog = null;
     }
 
     /*************

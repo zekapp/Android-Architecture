@@ -1,8 +1,12 @@
 package com.androidarchitecture.data.remote;
 
+import com.androidarchitecture.data.remote.posts.UpdateGcmTokenPost;
 import com.androidarchitecture.data.remote.responses.SampleResponseData;
+import com.androidarchitecture.data.remote.responses.SuccessResponse;
 import com.androidarchitecture.data.remote.responses.TokenResponse;
 
+import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -46,5 +50,8 @@ public interface ApiService {
     @GET("1/user/{userId}/profile.json")
     Observable<String> getProfile(@Path("userId") String userId);
 
+
+    @POST("updateToken")
+    Call<SuccessResponse> updateToken(@Body UpdateGcmTokenPost updateGcmTokenPost);
 
 }

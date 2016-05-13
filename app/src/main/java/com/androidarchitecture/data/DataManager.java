@@ -5,15 +5,19 @@ import com.androidarchitecture.data.job.fetch.FetchSamplesJob;
 import com.androidarchitecture.data.local.DatabaseHelper;
 import com.androidarchitecture.data.local.PreferencesHelper;
 import com.androidarchitecture.data.remote.ApiService;
+import com.androidarchitecture.data.remote.posts.UpdateGcmTokenPost;
 import com.androidarchitecture.data.remote.responses.SampleResponseData;
+import com.androidarchitecture.data.remote.responses.SuccessResponse;
 import com.androidarchitecture.data.vo.Sample;
 import com.path.android.jobqueue.JobManager;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -140,5 +144,25 @@ public class DataManager {
                 });
             }
         });
+    }
+
+    public boolean isGcmTokenSavedInOurServer() {
+        return mPreferencesHelper.isGCMTokenSavedToServer();
+    }
+
+    public String getSavedGcmToken() {
+        return mPreferencesHelper.getGCMToken();
+    }
+
+    public Response<SuccessResponse> updateTokenSynchronously(UpdateGcmTokenPost post) throws IOException {
+        return mApiService.updateToken(post).execute();
+    }
+
+    public void saveGCMToken(String token) {
+        mPreferencesHelper.saveGCMToken(token);
+    }
+
+    public void setGCMTokenSavedToServer(boolean isTokenSavedInOurServer) {
+        mPreferencesHelper.setGCMTokenSavedToServer(isTokenSavedInOurServer);
     }
 }

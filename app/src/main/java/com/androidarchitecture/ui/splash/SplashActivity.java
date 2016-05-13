@@ -26,7 +26,7 @@ import timber.log.Timber;
  * Created by Zeki Guler on 29,January,2016
  * ©2015 Appscore. All Rights Reserved
  */
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements SplashMvpView {
 
     private static final long SPLASH_TIME = 2500;
 
@@ -35,11 +35,12 @@ public class SplashActivity extends BaseActivity {
     private Thread splashTread;
     private boolean interrupted = false;
 
-    @Inject PreferencesHelper mPreferencesHelper;
-
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     private boolean isReceiverRegistered;
+
+    @Inject
+    SplashPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,27 +53,11 @@ public class SplashActivity extends BaseActivity {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
-                boolean sentToken = mPreferencesHelper.isGCMTokenSavedToServer();
-
-                // next time check the boolean if you save the the token in our server successfully.
                 startWaitThread();
-
             }
         };
 
-        if (mPreferencesHelper.getGCMToken().isEmpty()){
-            registerReceiver();
-
-            if (checkPlayServices()) {
-                // Start IntentService to register this application with GCM.
-                Intent intent = new Intent(this, RegistrationIntentService.class);
-                startService(intent);
-            }
-        } else {
-            Timber.i("GCM Token: %s", mPreferencesHelper.getGCMToken());
-            startWaitThread();
-        }
+        mPresenter.isThisDeviceRegisterForGCM();
     }
 
     @Override
@@ -126,6 +111,31 @@ public class SplashActivity extends BaseActivity {
         finish();
     }
 
+    /********
+     * MVP View Functions
+     ********/
+
+    @Override
+    public void deviceRegisteredSuccessfully(String gcmToken) {
+        Timber.i("GCM Token: %s", gcmToken);
+        startWaitThread();
+    }
+
+    @Override
+    public void deviceNeedsToBeRegister() {
+        if (checkPlayServices()){
+            registerReceiver();
+            // Start IntentService to register this application with GCM.
+            startService(RegistrationIntentService.getStartIntent(this));
+        }
+    }
+
+
+    /********
+     * Activity functions
+     ********/
+
+
     /**
      * Check the device to make sure it has the Google Play Services APK. If
      * it doesn't, display a dialog that allows users to download the APK from
@@ -146,4 +156,5 @@ public class SplashActivity extends BaseActivity {
         }
         return true;
     }
+
 }
