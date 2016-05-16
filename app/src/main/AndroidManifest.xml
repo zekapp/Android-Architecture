@@ -42,6 +42,7 @@
                   android:theme="@style/AppTheme.NoActionBar"/>
 
 
+
         <!-- [START gcm_receiver] -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

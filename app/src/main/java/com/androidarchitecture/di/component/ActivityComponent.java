@@ -22,7 +22,7 @@ public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
 
-    void inject(SplashActivity dispatchActivity);
+    void inject(SplashActivity splashActivity);
 
     void inject(SignInActivity signInActivity);
 }

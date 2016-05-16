@@ -5,10 +5,14 @@ import com.androidarchitecture.data.job.fetch.FetchSamplesJob;
 import com.androidarchitecture.data.local.DatabaseHelper;
 import com.androidarchitecture.data.local.PreferencesHelper;
 import com.androidarchitecture.data.remote.ApiService;
+import com.androidarchitecture.data.remote.posts.SignInCredentialPost;
 import com.androidarchitecture.data.remote.posts.UpdateGcmTokenPost;
+import com.androidarchitecture.data.remote.responses.APIError;
 import com.androidarchitecture.data.remote.responses.SampleResponseData;
 import com.androidarchitecture.data.remote.responses.SuccessResponse;
 import com.androidarchitecture.data.vo.Sample;
+import com.androidarchitecture.utils.JsonConverter;
+import com.androidarchitecture.utils.NetworkUtil;
 import com.path.android.jobqueue.JobManager;
 
 import java.io.IOException;
@@ -17,7 +21,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import okhttp3.ResponseBody;
 import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Completable;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -146,6 +153,63 @@ public class DataManager {
         });
     }
 
+    public Observable<SuccessResponse> login(String email, String password) {
+
+        SignInCredentialPost signInCredentialPost = new SignInCredentialPost
+                .Builder(email, password)
+                .build();
+
+        return mApiService.login(signInCredentialPost)
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends SuccessResponse>>() {
+            @Override
+            public Observable<? extends SuccessResponse> call(Throwable throwable) {
+                return Observable.error(networkError(throwable));
+            }
+        });
+    }
+
+    /**
+     * Network Error - Reformating error message
+     *
+     * It handles the incoming error and reformat for ore user friendly.
+     *
+     * If retuning message has an error messages then it shends to upper layer
+     *
+     * */
+
+    private Throwable networkError(Throwable e) {
+        String errorMessage = e.getMessage();
+        Timber.e("Error Message: %s",e.getMessage());
+
+        if (e instanceof HttpException){
+            HttpException httpException = (HttpException)e;
+            ResponseBody body = ((HttpException) e).response().errorBody();
+
+            errorMessage = httpException.getMessage();
+
+            try {
+                String errMsg = body.string();
+                APIError apiError = JsonConverter.convertJsonToObj(errMsg,APIError.class);
+
+                if(apiError != null)
+                    errorMessage = apiError.error.messages.get(0);
+
+                Timber.d("Server Message: %s", body.string());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        } else {
+            // Error may be related parding or the
+            Timber.e("Different Type Error: %s", e.getLocalizedMessage());
+            Timber.e("Different Type Error Deratil: %s", errorMessage);
+
+            errorMessage = "Please check your internet connection.";
+        }
+
+        return new Throwable(errorMessage);
+    }
+
     public boolean isGcmTokenSavedInOurServer() {
         return mPreferencesHelper.isGCMTokenSavedToServer();
     }
@@ -165,4 +229,6 @@ public class DataManager {
     public void setGCMTokenSavedToServer(boolean isTokenSavedInOurServer) {
         mPreferencesHelper.setGCMTokenSavedToServer(isTokenSavedInOurServer);
     }
+
+
 }

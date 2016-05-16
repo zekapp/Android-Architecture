@@ -1,5 +1,6 @@
 package com.androidarchitecture.data.remote;
 
+import com.androidarchitecture.data.remote.posts.SignInCredentialPost;
 import com.androidarchitecture.data.remote.posts.UpdateGcmTokenPost;
 import com.androidarchitecture.data.remote.responses.SampleResponseData;
 import com.androidarchitecture.data.remote.responses.SuccessResponse;
@@ -14,6 +15,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rx.Completable;
 import rx.Observable;
 
 /**
@@ -54,4 +56,6 @@ public interface ApiService {
     @POST("updateToken")
     Call<SuccessResponse> updateToken(@Body UpdateGcmTokenPost updateGcmTokenPost);
 
+    @POST("user/login")
+    Observable<SuccessResponse> login(@Body SignInCredentialPost signInCredentialPost);
 }

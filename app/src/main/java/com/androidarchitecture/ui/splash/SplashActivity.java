@@ -13,6 +13,7 @@ import com.androidarchitecture.data.local.PreferencesHelper;
 import com.androidarchitecture.gcm.QuickstartPreferences;
 import com.androidarchitecture.gcm.RegistrationIntentService;
 import com.androidarchitecture.ui.base.BaseActivity;
+import com.androidarchitecture.ui.login.SignInActivity;
 import com.androidarchitecture.ui.sample.SampleActivity;
 import com.androidarchitecture.utils.Utils;
 import com.google.android.gms.common.ConnectionResult;
@@ -47,7 +48,8 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
         setContentView(R.layout.splash_screen);
-        //print KeyHash
+        mPresenter.attachView(this);
+        //print KeyHash. May need for Facebook Login
         Utils.printHashKey(this);
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -104,10 +106,9 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
     }
 
     private void closeSplash() {
-        Intent intent = new Intent();
-        intent.setClass(this, SampleActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
+        Intent i = SignInActivity.newIntent(this);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(i);
         finish();
     }
 

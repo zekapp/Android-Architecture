@@ -7,5 +7,4 @@ package com.androidarchitecture.ui.base;
  * that then usually will be implemented by an Activity or Fragment.
  */
 public interface MvpView {
-
 }

@@ -5,6 +5,8 @@ import com.androidarchitecture.ui.base.BasePresenter;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 /**
  * Created by Zeki Guler on 12,May,2016
  * ©2015 Appscore. All Rights Reserved
@@ -31,6 +33,7 @@ public class SplashPresenter extends BasePresenter<SplashActivity>{
 
     public void isThisDeviceRegisterForGCM() {
         boolean alreadyRegistered = mDataManager.isGcmTokenSavedInOurServer();
+        Timber.d("alreadyRegistered %s", alreadyRegistered);
 
         if (alreadyRegistered){
             String gcmToken = mDataManager.getSavedGcmToken();

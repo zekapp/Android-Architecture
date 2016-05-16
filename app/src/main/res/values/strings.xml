@@ -7,4 +7,14 @@
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Cancel</string>
     <string name="dialog_error_title">Sorry</string>
+    <string name="hint_login_email">Email Address</string>
+    <string name="hint_login_password">Password</string>
+    <string name="login_button_action">Login</string>
+
+    <string name="error_invalid_password">This Password is too short</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_not_match_password">Password and Confirmation does not match</string>
+    <string name="error_unauthorized_user">The email/phone you entered is incorrect. Please try again.</string>
+
 </resources>

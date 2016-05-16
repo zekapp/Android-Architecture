@@ -1,5 +1,7 @@
 package com.androidarchitecture.ui.sample;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,12 +24,19 @@ import butterknife.ButterKnife;
  * Created by Zeki Guler on 20,January,2016
  * ©2015 Appscore. All Rights Reserved
  */
+
+
 public class SampleActivity extends BaseActivity implements SampleMvpView {
 
     @Inject SamplePresenter mSamplePresenter;
     @Inject SampleAdapter mSampleAdapter;
 
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
+
+    public static Intent newIntent(Context context ) {
+        Intent intent = new Intent(context, SampleActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +51,16 @@ public class SampleActivity extends BaseActivity implements SampleMvpView {
         mSamplePresenter.loadSamples();
     }
 
-    /***** MVP View methods implementation *****/
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSamplePresenter.detachView();
+    }
+
+    /********
+     * MVP View Functions
+     ********/
+
 
     @Override
     public void showSamples(List<Sample> samples) {
