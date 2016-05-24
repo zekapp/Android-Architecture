@@ -90,7 +90,7 @@ Looking at the diagram from right to left:
 
 ## Distribution
 
-The project can be distributed using either [Crashlytics](http://support.crashlytics.com/knowledgebase/articles/388925-beta-distributions-with-gradle) or the [Google Play Store](https://github.com/Triple-T/gradle-play-publisher).
+The project can be distributed using the [Google Play Store](https://github.com/Triple-T/gradle-play-publisher).
 
 ### Play Store
 

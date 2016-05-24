@@ -2,10 +2,6 @@ buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
     }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
 }
 apply plugin: 'com.android.application'
 //apply plugin: 'io.fabric'
@@ -15,7 +11,7 @@ apply plugin: 'com.github.triplet.play'
 
 String APK_NAME = "aa"
 int VERSION_CODE = 1
-String VERSION_NAME = "0.4.0"
+String VERSION_NAME = "0.4.1"
 
 // This line generates the apk with set name.
 project.archivesBaseName = APK_NAME + "_v_" + VERSION_NAME;
