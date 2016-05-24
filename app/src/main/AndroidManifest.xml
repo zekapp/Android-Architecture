@@ -78,10 +78,6 @@
         <service android:name=".gcm.RegistrationIntentService"
                  android:exported="false">
         </service>
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="2061da790245376da9edaafacd12b5492bc9ddae" />
     </application>
 
 

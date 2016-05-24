@@ -10,10 +10,6 @@ buildscript {
 apply plugin: 'com.android.application'
 //apply plugin: 'io.fabric'
 
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
-
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.github.triplet.play'
 
@@ -164,7 +160,4 @@ dependencies {
     // APT dependencies
     apt daggerCompiler
     apt dbFlowCompiler
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
-    }
 }

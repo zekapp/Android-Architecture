@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="THIS IS SPLASH SCREEN \n IT IS GOING TO DISAPEAR IN 5 SEC"
+        android:text="THIS IS SPLASH SCREEN. AFTER REGISTERED TO GCM IT WILL DISAPPEAR IN 5 SEC"
         android:gravity="center"/>
 
 </RelativeLayout>

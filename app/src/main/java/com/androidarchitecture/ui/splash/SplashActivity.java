@@ -52,6 +52,8 @@ public class SplashActivity extends BaseActivity implements SplashMvpView {
         //print KeyHash. May need for Facebook Login
         Utils.printHashKey(this);
 
+        mPresenter.attachView(this);
+
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {

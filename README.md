@@ -1,5 +1,5 @@
 # Android-Architecture
-Provides information on Android Architecture.
+Provides information on Android Architecture. 
 
 Libraries and tools included:
 
@@ -14,6 +14,34 @@ Libraries and tools included:
 - [EventBus](https://github.com/greenrobot/EventBus)
 - [JobManager](https://github.com/yigit/android-priority-jobqueue)
 - [PlayService](https://developers.google.com/android/guides/setup)
+
+
+This architecture is basically forked from [android-boilerplate](https://labs.ribot.co.uk/android-application-architecture-8b6e34acda65#.8yfra7ozv) 
+and improved by studying with other android architectures such as [Androidstarter](http://roroche.github.io/AndroidStarter/), 
+[Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture),
+[Architecting Android…The evolution](http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/).
+
+Before starting a new project please read [Guidelines: Android](https://github.com/appscore/AppscoreDevelopment/wiki/Guidelines:-Android)
+
+Please see Bibliography end of this page to get more detail about this architecture.
+
+## New project setup 
+
+To quickly start a new project from this boilerplate follow the next steps:
+
+* Download this
+* Change the package name. 
+  * Rename packages in main, androidTest and test using Android Studio.
+  * In `app/build.gradle` file, `packageName` and `testInstrumentationRunner`.
+  * In `src/main/AndroidManifest.xml` and `src/debug/AndroidManifest.xml`.
+* Create a new git repository, [GitHub tutorial](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
+* Replace the example code with your app code following the same architecture.
+* In `app/build.gradle` add the signing config to enable release versions.
+* Add Fabric API key and secret to fabric.properties and uncomment Fabric plugin set up in `app/build.gradle`
+* Create `keystore` folder under `app`. Keep keystore in here. If you don't know how to create keystore please read [Guidelines: Android](https://github.com/appscore/AppscoreDevelopment/wiki/Guidelines:-Android)   
+* Update `proguard-rules.pro` to keep models (see TODO in file) and add extra rules to file if needed.
+* Update README with information relevant to the new project.
+* Update LICENSE to match the requirements of the new project.
 
 ### How to implement a new screen following MVP
 
@@ -32,7 +60,7 @@ Please see the `SampleActivity` implementation.
 
 # Architecture Guidelines
 
-The architecture of our Android apps is based on the [MVP](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) (Model View Presenter) pattern.
+The architecture of our Android apps is based on the [MVP](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) (Model View Presenter) pattern. 
 
 * __View (UI layer)__: this is where Activities, Fragments and other standard Android components live. It's responsible for displaying the data received from the presenters to the user. It also handles user interactions and inputs (click listeners, etc) and triggers the right action in the Presenter if needed.
 
@@ -85,31 +113,15 @@ To upload a release build to Crashlytics run:
 ./gradlew assembleRelease crashlyticsUploadDistributionRelease
 ```
 
-## New project setup 
-
-To quickly start a new project from this boilerplate follow the next steps:
-
-* Download this
-* Change the package name. 
-  * Rename packages in main, androidTest and test using Android Studio.
-  * In `app/build.gradle` file, `packageName` and `testInstrumentationRunner`.
-  * In `src/main/AndroidManifest.xml` and `src/debug/AndroidManifest.xml`.
-* Create a new git repository, [see GitHub tutorial](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
-* Replace the example code with your app code following the same architecture.
-* In `app/build.gradle` add the signing config to enable release versions.
-* Add Fabric API key and secret to fabric.properties and uncomment Fabric plugin set up in `app/build.gradle`
-* Update `proguard-rules.pro` to keep models (see TODO in file) and add extra rules to file if needed.
-* Update README with information relevant to the new project.
-* Update LICENSE to match the requirements of the new project.
-
-### Sources
+### Bibliography
+- Ribot [click](https://labs.ribot.co.uk/android-application-architecture-8b6e34acda65#.8yfra7ozv)
 - Android-CleanArchitecture [click](https://github.com/android10/Android-CleanArchitecture)
 - Architecting Android…The evolution [click](http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/)
 - Reak [click](https://github.com/reark/reark)
 - Android Dev Summit 2015 [click](https://www.youtube.com/watch?v=BlkJzgjzL0c)
-- Mosb [click](http://hannesdorfmann.com/mosby/)
+- Mosby [click](http://hannesdorfmann.com/mosby/)
 - Approaching Android with MVVM [click](https://labs.ribot.co.uk/approaching-android-with-mvvm-8ceec02d5442#.x49fpvrh7)
-- Ribot [click](https://labs.ribot.co.uk/android-application-architecture-8b6e34acda65#.8yfra7ozv)
+
 
 
 
